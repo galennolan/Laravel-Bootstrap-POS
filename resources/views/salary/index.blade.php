@@ -44,10 +44,19 @@
                             <div class="form-group">
                                 <label for="month">Month</label>
                                 <select class="form-control @error('month') is-invalid @enderror" name="month" id="month">
-                                    <option value="">Select a month</option>
-                                    @foreach ($months as $month)
-                                        <option value="{{ $month }}" {{ old('month') == $month ? 'selected' : '' }}>{{ $month }}</option>
-                                    @endforeach
+                                <option value="" selected disabled>Pilih Bulan</option>
+                                                <option value="1">Januari</option>
+                                                <option value="2">Februari</option>
+                                                <option value="3">Maret</option>
+                                                <option value="4">April</option>
+                                                <option value="5">Mei</option>
+                                                <option value="6">Juni</option>
+                                                <option value="7">Juli</option>
+                                                <option value="8">Agustus</option>
+                                                <option value="9">September</option>
+                                                <option value="10">Oktober</option>
+                                                <option value="11">November</option>
+                                                <option value="12">Desember</option>
                                 </select>
 
                                 @error('month')
@@ -95,10 +104,10 @@
                                 <tr>
                                     <td>{{ date('d M Y', strtotime($salary->date)) }}</td>
                                     <td>{{ $salary->employee->name }}</td>
-                                    <td>{{ $salary->month }} {{ $salary->year }}</td>
+                                    <td>{{ $salary->month_year }}</td>
                                     <td>{{ $salary->amount }}</td>
                                     <td>
-                                        <a href="{{ route('salary.show', $salary->id) }}" class="btn btn-primary btn-sm">View</a>
+                                    <a href="{{ route('salary.show', $salary->id) }}" class="btn btn-primary btn-sm">View</a>
                                         <a href="{{ route('salary.edit', $salary->id) }}" class="btn btn-success btn-sm">Edit</a>
                                         <form action="{{ route('salary.destroy', $salary->id) }}" method="POST" style="display: inline-block;">
                                             @csrf
@@ -113,4 +122,4 @@
                     </div>
                 </div>
             </div>
-
+@endsection

@@ -16,12 +16,20 @@ class SalaryController extends Controller
      */
     public function index()
     {
-       // Fetch all unique month_year values from the Salary model
-        $salaries  = Salary::select('month_year')->distinct()->get();
+        $salaries = Salary::select('month_year', 'employee_id','amount')->groupBy('month_year', 'employee_id','amount')->get();
+        $months = [];
         $employees = Employee::all();
 
-        return view('salary.index', compact('salaries', 'employees'));
+        foreach ($salaries as $salary) {
+            $month_year = $salary->month_year;
+            $month = date('F', strtotime($month_year));
+            $year = date('Y', strtotime($month_year));
+            $months[$month_year] = $month . ' ' . $year;
+        }
+
+        return view('salary.index', compact('salaries', 'months', 'employees'));
     }
+
 
 
     public function month_year($month_year)
@@ -36,7 +44,7 @@ class SalaryController extends Controller
         $employees = Employee::all();
         $month = explode('_', $salary->month_year)[0];
         $year = explode('_', $salary->month_year)[1];
-        return view('salaries.edit', compact('salary', 'employees', 'month', 'year'));
+        return view('salary.edit', compact('salary', 'employees', 'month', 'year'));
     }
 
     public function update(Request $request, Salary $salary)
@@ -56,21 +64,42 @@ class SalaryController extends Controller
         $salary->date = date('Y-m-d');
         $salary->save();
 
-        return redirect()->route('salaries.index')
+        return redirect()->route('salary.index')
             ->with('success', 'Salary record updated successfully');
         }
+
+        public function store(Request $request)
+        {
+            $validatedData = $request->validate([
+                'employee_id' => 'required|integer',
+                'amount' => 'required|numeric',
+                'month' => 'required|integer',
+                'year' => 'nullable|string',
+            ]);
+            $month = sprintf("%02d", $validatedData['month']);
+            $salary = new Salary;
+            $salary->employee_id = $validatedData['employee_id'];
+            $salary->amount = $validatedData['amount'];
+            $salary->date = date('Y-m-d');
+            $salary->month_year = $validatedData['year'];
+
+            $salary->save();
+
+            return redirect()->route('salary.index')->with('success', 'Salary record has been created successfully!');
+        }
+
         public function destroy(Salary $salary)
         {
             $salary->delete();
         
-            return redirect()->route('salaries.index')
+            return redirect()->route('salary.index')
                 ->with('success', 'Salary record deleted successfully');
         }
         public function getEmployeeSalaries(Employee $employee)
         {
             $salaries = Salary::where('employee_id', $employee->id)->get();
         
-            return view('salaries.employee', compact('employee', 'salaries'));
+            return view('salary.employee', compact('employee', 'salaries'));
         }
         
 
