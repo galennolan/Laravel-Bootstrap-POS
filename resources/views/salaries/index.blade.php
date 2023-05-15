@@ -102,18 +102,16 @@
                             <tbody>
                             @foreach ($salaries as $salary)
                                 <tr>
-                                    <td>{{ date('d M Y', strtotime($salary->date)) }}</td>
+                                    <td>{{ $salary->date}}</td>
                                     <td>{{ $salary->employee->name }}</td>
                                     <td>{{ $salary->month_year }}</td>
                                     <td>{{ $salary->amount }}</td>
-                                    <td>
-                                    <a href="{{ route('salary.show', $salary->id) }}" class="btn btn-primary btn-sm">View</a>
-                                        <a href="{{ route('salary.edit', $salary->id) }}" class="btn btn-success btn-sm">Edit</a>
-                                        <form action="{{ route('salary.destroy', $salary->id) }}" method="POST" style="display: inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
+                                    <td><a href="{{ route('salaries.edit', $salary->id) }}" class="btn btn-primary">Edit</a>
+                                    <form action="{{ route('salaries.destroy', $salary->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Delete</button>
+                                    </form>
                                     </td>
                                 </tr>
                                 @endforeach

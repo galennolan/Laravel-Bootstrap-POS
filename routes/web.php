@@ -27,3 +27,6 @@ Route::resource('employees', 'EmployeeController')->names('employees');
 Route::resource('expenses', 'ExpenseController')->names('expenses');
 Route::resource('products', 'ProductController')->names('products');
 Route::resource('salaries', 'SalaryController')->names('salaries');
+Route::delete('/salaries/{salary}', 'SalaryController@destroy')->name('salaries.destroy');
+Route::get('/salaries', 'SalaryController@index')->name('salaries.index');
+Route::get('salaries/{id}/edit', [SalaryController::class, 'edit'])->name('salaries.edit');

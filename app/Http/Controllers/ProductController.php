@@ -14,6 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('category', 'supplier')->latest()->get();
+       
         return view('products.index', compact('products'));
     }
 
@@ -70,19 +71,38 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::find($id);
-        return view('products.edit', ['product' => $product]);
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        
+        return view('products.edit', compact('product', 'categories', 'suppliers'));
     }
 
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'supplier_id' => 'required|exists:suppliers,id',
+            'buying_price' => 'required|numeric',
+            'selling_price' => 'required|numeric',
+            'quantity' => 'required|integer',
+            'code' => 'required|unique:products,code,'.$id,
+        ]);
+        
         $product = Product::find($id);
         $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
+        $product->code = $request->code;
+        $product->quantity = $request->quantity;
+        $product->category_id = $request->category_id;        
+        $product->supplier_id = $request->supplier_id;
+        $product->buying_price = $request->buying_price;
+        $product->selling_price = $request->selling_price;
+        
+        
         $product->save();
 
-        return redirect('/products');
+        return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
 
     public function destroy($id)
