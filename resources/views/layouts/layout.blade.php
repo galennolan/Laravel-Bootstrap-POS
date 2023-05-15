@@ -83,6 +83,12 @@
                     <i class="fas fa-boxes fa-fw"></i>
                     <span>Products</span></a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/salaries">
+                    <i class="fas fa-money-bill-alt fa-fw"></i>
+                    <span>Salary</span></a>
+            </li>
             
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

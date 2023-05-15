@@ -5,9 +5,15 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Product List <span class="float-right"><a href="{{ route('products.create') }}" class="btn btn-primary btn-sm">Add Product</a></span></div>
+                    <div class="card-header">Product List </div>
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Add Product</a>
+
+                        @if(session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                        @endif
+                      
+                            <table class="table table-bordered tables-striped" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>Name</th>

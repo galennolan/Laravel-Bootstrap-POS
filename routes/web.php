@@ -26,3 +26,4 @@ Route::resource('suppliers', 'SupplierController')->names('suppliers');
 Route::resource('employees', 'EmployeeController')->names('employees');
 Route::resource('expenses', 'ExpenseController')->names('expenses');
 Route::resource('products', 'ProductController')->names('products');
+Route::resource('salaries', 'SalaryController')->names('salaries');

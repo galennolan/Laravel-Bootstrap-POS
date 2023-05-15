@@ -13,16 +13,16 @@
                         @if(session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
-
-                        <table class="table table-bordered">
+                      
+                            <table class="table table-bordered tables-striped" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Date</th>
-                                    <th>details</th>
-                                    <th>Amount</th>
-                                
-                                    <th>Action</th>
+                                    <th class="font-weight-bold">Date</th>
+                                    <th class="font-weight-bold">Details</th>
+                                    <th class="font-weight-bold">Amount</th>
+                                    <th class="font-weight-bold">Action</th>
                                 </tr>
+
                             </thead>
                             <tbody>
                                 @foreach($expenses as $expense)
@@ -46,6 +46,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
             </div>
