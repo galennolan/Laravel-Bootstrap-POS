@@ -45,7 +45,7 @@ class SupplierController extends Controller
             'address'   => 'required',
             'phone'     => 'required|numeric|unique:suppliers',
             'shop_name' => 'nullable|unique:suppliers',
-            'photo'     => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'new_photo'     => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->photo) {

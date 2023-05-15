@@ -48,31 +48,42 @@
             <span> Beranda </span> </a>
             </li>
 
-
             <li class="nav-item">
                 <a class="nav-link" href="/categories">
-                    <i class="fas fa-fw fa-archive"></i>
+                    <i class="fas fa-tags fa-fw"></i>
                     <span>Kategori</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/customers">
-                    <i class="fas fa-fw fa-archive"></i>
-                    <span>customers</span></a>
+                    <i class="fas fa-users fa-fw"></i>
+                    <span>Customers</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/suppliers">
-                    <i class="fas fa-fw fa-archive"></i>
-                    <span>suppliers</span></a>
+                    <i class="fas fa-truck fa-fw"></i>
+                    <span>Suppliers</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/employees">
-                    <i class="fas fa-fw fa-archive"></i>
+                    <i class="fas fa-users-cog fa-fw"></i>
                     <span>Employees</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="/expenses">
+                    <i class="fas fa-money-bill fa-fw"></i>
+                    <span>Expenses</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/products">
+                    <i class="fas fa-boxes fa-fw"></i>
+                    <span>Products</span></a>
+            </li>
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

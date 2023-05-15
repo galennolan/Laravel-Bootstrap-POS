@@ -24,3 +24,5 @@ Route::resource('categories', 'CategoryController')->names('categories');
 Route::resource('customers', 'CustomerController')->names('customers');
 Route::resource('suppliers', 'SupplierController')->names('suppliers');
 Route::resource('employees', 'EmployeeController')->names('employees');
+Route::resource('expenses', 'ExpenseController')->names('expenses');
+Route::resource('products', 'ProductController')->names('products');
