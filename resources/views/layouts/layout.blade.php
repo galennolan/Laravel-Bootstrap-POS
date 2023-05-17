@@ -90,6 +90,19 @@
                     <span>Salary</span></a>
             </li>
             
+            <li class="nav-item">
+                <a class="nav-link" href="/orders">
+                    <i class="fas fa-shopping-cart fa-fw"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/cart">
+                    <i class="fas fa-shopping-bag fa-fw"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
