@@ -102,7 +102,7 @@
                             <tbody>
                             @foreach ($salaries as $salary)
                                 <tr>
-                                    <td>{{ $salary->date}}</td>
+                                <td>{{ $salary->date }}</td>
                                     <td>{{ $salary->employee->name }}</td>
                                     <td>{{ $salary->month_year }}</td>
                                     <td>{{ $salary->amount }}</td>

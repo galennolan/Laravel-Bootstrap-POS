@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Salary;
 use App\Employee;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SalaryController extends Controller
@@ -41,27 +41,33 @@ class SalaryController extends Controller
     public function edit($id)
     {
         $salary = Salary::with('employee')->findOrFail($id);
-    return view('salaries.edit', compact('salary'));
+        $salary->date = Carbon::createFromFormat('Y-m-d', $salary->date);
+        return view('salaries.edit', compact('salary'));
     }
    
-    public function update(Request $request, Salary $salary)
-{
-    $validatedData = $request->validate([
-        'employee_id' => 'required|integer',
-        'amount' => 'required|numeric',
-        'month' => 'required|string',
-        'year' => 'nullable|string',
-    ]);
+    public function update(Request $request,$id)
+    {
+      
+        $validatedData = $request->validate([
+            'employee_id' => 'required|integer',
+            'amount' => 'required|numeric',
+            'month' => 'required',
+            'year' => 'required|numeric',
+            'month_year' => 'nullable|string',
+        ]);
+        $date = $validatedData['year'] . '-' . $validatedData['month'] . '-01';
 
-    $salary->employee_id = $validatedData['employee_id'];
-    $salary->amount = $validatedData['amount'];
-    $salary->date =  $month;
-    $salary->month_year = $validatedData['year'];
+        $salary = Salary::findOrFail($id);
+        $salary->employee_id = $validatedData['employee_id'];
+        $salary->amount = $validatedData['amount'];
+        $salary->date = $date;
+        $salary->month_year = $validatedData['month_year'];
 
-    $salary->save();
 
-    return redirect()->route('salaries.index')->with('success', 'Salary record updated successfully');
-}
+        $salary->save();
+
+        return redirect()->route('salaries.index')->with('success', 'Salary record updated successfully');
+    }
 
     public function store(Request $request)
     {
@@ -72,11 +78,11 @@ class SalaryController extends Controller
             'year' => 'nullable|string',
         ]);
 
-        $month = sprintf("%02d", $validatedData['month']);
+
         $salary = new Salary;
         $salary->employee_id = $validatedData['employee_id'];
         $salary->amount = $validatedData['amount'];
-        $salary->date = $month;
+        $salary->date = $validatedData['year'] . '-' . $validatedData['month'] . '-01';
         $salary->month_year = $validatedData['year'];
 
         $salary->save();
