@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Pemesanan extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class Pemesanan extends Migration
      */
     public function up()
     {
-        Schema::create('pemesanan', function(Blueprint $table){
-            $table->string('no_pesan',14)->primary;
-            $table->date('tgl_pesan');
-            $table->integer('total');
-            $table->string('kd_supp',5);
-
-        });
+        Schema::create( 'categories', function ( Blueprint $table ) {
+            $table->id();
+            $table->string( 'name' )->unique();
+            $table->timestamps();
+        } );
     }
 
     /**
@@ -29,6 +27,6 @@ class Pemesanan extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists( 'categories' );
     }
 }

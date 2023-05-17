@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TriggerTambah extends Migration
+class CreateCartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class TriggerTambah extends Migration
      */
     public function up()
     {
-        DB::unprepared('
-        CREATE TRIGGER update_stok after INSERT ON detail_pembelian
-        FOR EACH ROW BEGIN
-        UPDATE barang
-        SET stok = stok + qty_beli
-        WHERE
-        kd_brg = NEW.kd_brg;
-        END
-        ');
+        Schema::create( 'carts', function ( Blueprint $table ) {
+            $table->id();
+            $table->unsignedBigInteger( 'product_id' );
+            $table->integer( 'quantity' );
+            $table->timestamps();
+        } );
     }
 
     /**
@@ -31,6 +28,6 @@ class TriggerTambah extends Migration
      */
     public function down()
     {
-        DB::unprepared('DROP TRIGGER update_stok');
+        Schema::dropIfExists( 'carts' );
     }
 }
