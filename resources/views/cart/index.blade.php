@@ -48,14 +48,16 @@
                     <tbody>
                         @foreach ($cartItems as $cartItem)
                             <tr>
-                                <td>{{ $cartItem->product->name }}</td>
-                                <td>{{ $cartItem->product->formatted_selling_price }}</td>
+                                <td>@if ($cartItem->product){{  $cartItem->product->name  }}@endif</td>
+                                <td>@if ($cartItem->product)
+                                    {{ $cartItem->product->formatted_selling_price }}
+                                @endif</td>
                                 <td>
                                     <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" id="update-form-{{ $cartItem->id }}">
                                         @csrf
                                         @method('PUT')
                                         <div class="input-group">
-                                            <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" max="{{ $cartItem->product->quantity }}" class="form-control" id="quantity-input-{{ $cartItem->id }}">
+                                            <input type="number" name="quantity" value="@if ($cartItem->product){{ $cartItem->quantity }}@endif" min="1" max="@if ($cartItem->product){{ $cartItem->product->quantity }}@endif" class="form-control" id="quantity-input-{{ $cartItem->id }}">
                                         </div>
                                     </form>
                                     

@@ -21,10 +21,11 @@ class CartController extends Controller
         $total = 0;
         //pemformatan cartitem
         foreach ($cartItems as $cartItem) {
-        
-            $cartItem->product->formatted_selling_price = $this->formatPrice($cartItem->product->selling_price);
-            $cartItem->formatted_subtotal = $this->formatPrice($cartItem->product->selling_price * $cartItem->quantity); //subtotal
-            $total += $cartItem->product->selling_price * $cartItem->quantity;
+            $cartItem->formatted_subtotal = $this->formatPrice($cartItem->product ? $cartItem->product->selling_price * $cartItem->quantity : 0);
+            if ($cartItem->product) {
+                $cartItem->product->formatted_selling_price = $this->formatPrice($cartItem->product->selling_price);
+                $total += $cartItem->product->selling_price * $cartItem->quantity;
+            }
         }
         //pemformatan produk
         foreach ($products as $product) {

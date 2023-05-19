@@ -100,7 +100,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/cart">
                     <i class="fas fa-shopping-bag fa-fw"></i>
-                    <span>Orders</span>
+                    <span>Carts</span>
                 </a>
             </li>
             <!-- Divider -->
