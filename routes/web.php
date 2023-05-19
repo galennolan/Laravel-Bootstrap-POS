@@ -45,3 +45,5 @@ Route::post('/cart/{id}/decrease', 'CartController@decrease')->name('cart.decrea
 Route::delete('/cart/{id}', 'CartController@destroy')->name('cart.destroy');
 Route::put('/cart/{id}','CartController@update')->name('cart.update');
 Route::post('/cart/order', 'CartController@order')->name('cart.order');
+Route::view('/cart/success', 'cart.success')->name('order.success');
+

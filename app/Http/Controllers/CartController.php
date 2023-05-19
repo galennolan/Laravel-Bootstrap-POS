@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Product;
+use App\Customer;
 use Illuminate\Http\Request;
 use App\Order;
 use App\OrderDetail;
@@ -17,14 +18,17 @@ class CartController extends Controller
     public function index()
     {
         $products = Product::available()->get();
+        $customers = Customer::all();
         $cartItems = Cart::with('product')->get();
         $total = 0;
+        $subtotalpr =0;
         //pemformatan cartitem
         foreach ($cartItems as $cartItem) {
             $cartItem->formatted_subtotal = $this->formatPrice($cartItem->product ? $cartItem->product->selling_price * $cartItem->quantity : 0);
             if ($cartItem->product) {
                 $cartItem->product->formatted_selling_price = $this->formatPrice($cartItem->product->selling_price);
                 $total += $cartItem->product->selling_price * $cartItem->quantity;
+                $subtotalpr += $cartItem->quantity;
             }
         }
         //pemformatan produk
@@ -34,7 +38,7 @@ class CartController extends Controller
 
         $formattedTotal = $this->formatPrice($total);
 
-        return view('cart.index', compact('products', 'cartItems', 'formattedTotal'));
+        return view('cart.index', compact('products', 'cartItems', 'formattedTotal','customers','subtotalpr'));
     }
 
 
@@ -62,23 +66,52 @@ class CartController extends Controller
         $cartItems = Cart::with('product')->get();
 
         $order = new Order();
-    
-        $order->total_price = Cart::total();
-        $order->save();
+        if ($request->has('customer_id')) {
+            $order->customer_id = $request->input('customer_id');
+        }
+        $order->quantity = $request->quantity;
 
+        // Calculate the total price of the cart
+        $totalPrice = $cartItems->sum(function ($cartItem) {
+            return $cartItem->product->selling_price * $cartItem->quantity;
+        });
+        $subtotalpr = $cartItems->sum('quantity');
+
+        $order->total = $totalPrice;
+        $order->vat = "2";
+        $order->paid =  $totalPrice;
+        $order->quantity = $subtotalpr;
+        $order->paidBy = "cash";
+        $order->date = date( 'Y-m-d' );
+        $order->month = date( 'F' );
+        $order->year = date( 'Y' );
+        // Calculate the subtotal for each item in the cart
+        $cartItems = $cartItems->map(function ($cartItem) {
+            $cartItem->sub_total = $cartItem->product->selling_price * $cartItem->quantity;
+            return $cartItem;
+        });
+    
+        // Calculate the total subtotal of the cart
+        $totalSubTotal = $cartItems->sum('sub_total');
+        $order->sub_total = $totalSubTotal;
+    
+        $order->save();
+    
         foreach ($cartItems as $cartItem) {
             $orderDetail = new OrderDetail();
-            $orderDetail->order_id = $order->id;
-            $orderDetail->product_id = $cartItem->product->id;
+            $orderDetail->order_id = "11";
+            $orderDetail->product_id = $cartItem->product_id;
             $orderDetail->quantity = $cartItem->quantity;
             $orderDetail->price = $cartItem->product->selling_price;
+            $orderDetail->sub_total = $cartItem->product->selling_price * $cartItem->quantity;
             $orderDetail->save();
         }
-
+    
         Cart::truncate();
-
+    
         return redirect()->route('order.success');
     }
+    
     public function increase($id)
     {
         $cart = Cart::findOrFail($id);

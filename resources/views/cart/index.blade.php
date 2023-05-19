@@ -1,9 +1,12 @@
 @extends('layouts.layout')
 
 @section('content')
+
     <div class="container">
         <div class="row">
+        
             <div class="col-md-6">
+            <h2>Daftar Produk</h2>
             <div class="table-responsive">
         <table class="table table-bordered tables" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -92,15 +95,25 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3"><strong>Total:</strong></td>
-                            <td colspan="2"><strong>Rp{{ $formattedTotal }}</strong></td>
+                            <td colspan="2"><strong>Total:</strong></td>
+                            <td colspan="1"><strong>{{$subtotalpr}}</strong></td>
+                            <td colspan="1"><strong>Rp{{ $formattedTotal }}</strong></td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
     </div>
+
     <form action="{{ route('cart.order') }}" method="POST">
+    <div class="form-group">
+            <label for="customer_id">Pilih Customer:</label>
+            <select class="form-control" id="customer_id" name="customer_id">
+                @foreach ($customers as $customer)
+                    <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                @endforeach
+            </select>
+        </div>
     @csrf
     <button type="submit" class="btn btn-primary">Order All</button>
 </form>
