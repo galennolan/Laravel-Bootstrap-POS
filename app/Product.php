@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    public function scopeAvailable($query)
+    {
+        return $query->where('quantity', '>', 0);
+    }
+
     protected $guarded = [];
 
     public function category()

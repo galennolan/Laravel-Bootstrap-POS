@@ -10,6 +10,7 @@
                         <tr>
                             <th>Product</th>
                             <th>Price</th>
+                            <th>Qty</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -18,6 +19,7 @@
                             <tr>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->formatted_selling_price }}</td>
+                                <td>{{ $product->quantity }}</td>
                                 <td>
                                     <form action="{{ route('cart.store') }}" method="POST">
                                         @csrf
@@ -48,32 +50,41 @@
                             <tr>
                                 <td>{{ $cartItem->product->name }}</td>
                                 <td>{{ $cartItem->product->formatted_selling_price }}</td>
-                                <td>{{ $cartItem->quantity }}</td>
+                                <td>
+                                    <form action="{{ route('cart.update', $cartItem->id) }}" method="POST" id="update-form-{{ $cartItem->id }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="input-group">
+                                            <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" max="{{ $cartItem->product->quantity }}" class="form-control" id="quantity-input-{{ $cartItem->id }}">
+                                        </div>
+                                    </form>
+                                    
+                                </td>
                                 <td>{{ $cartItem->formatted_subtotal  }}</td>
                                 <td>
-    <div class="d-flex align-items-center">
-        
-        <form action="{{ route('cart.increase', $cartItem->id) }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-sm btn-outline-success me-2">
-                <i class="fas fa-plus"></i>
-            </button>
-        </form>
-        <form action="{{ route('cart.decrease', $cartItem->id) }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-sm btn-outline-warning">
-            <i class="fas fa-minus"></i>
-            </button>
-        </form>
-        <form action="{{ route('cart.destroy', $cartItem->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-sm btn-outline-danger me-2">
-                <i class="fas fa-shopping-cart fa-fw"></i>
-            </button>
-        </form>
-    </div>
-</td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <form action="{{ route('cart.increase', $cartItem->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-outline-success me-2">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('cart.decrease', $cartItem->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-minus"></i>
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('cart.destroy', $cartItem->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger me-2">
+                                            <i class="fas fa-shopping-cart fa-fw"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                             </tr>
                         @endforeach
                     </tbody>

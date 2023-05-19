@@ -16,7 +16,7 @@ class CartController extends Controller
 
     public function index()
     {
-        $products = Product::all();
+        $products = Product::available()->get();
         $cartItems = Cart::with('product')->get();
         $total = 0;
         //pemformatan cartitem
@@ -99,11 +99,53 @@ class CartController extends Controller
 
         return redirect()->route('cart.index');
     }
-
+    
+    public function update($id, Request $request)
+    {
+        // Get the cart item by ID
+        $cartItem = Cart::findOrFail($id);
+    
+        // Get the product associated with the cart item
+        $product = Product::findOrFail($cartItem->product_id);
+    
+        // Validate the new quantity value
+        $request->validate([
+            'quantity' => 'required|integer|min:1|max:' . $product->quantity,
+        ]);
+    
+        // Get the new quantity value from the request
+        $newQuantity = $request->input('quantity');
+    
+        // Calculate the difference between the old and new quantity values
+        $quantityDifference = $newQuantity - $cartItem->quantity;
+    
+        // Update the cart item quantity
+        $cartItem->quantity = $newQuantity;
+        $cartItem->update();
+    
+        // Update the product quantity
+        $product->quantity -= $quantityDifference;
+        $product->update();
+    
+        // Redirect back to the cart page
+        return redirect()->route('cart.index');
+    }
     public function destroy($id)
     {
-        Cart::findOrFail($id)->delete();
+        // Get the cart item by ID
+        $cartItem = Cart::findOrFail($id);
 
+        // Get the product associated with the cart item
+        $product = Product::findOrFail($cartItem->product_id);
+
+        // Update the product quantity
+        $product->quantity += $cartItem->quantity;
+        $product->save();
+
+        // Delete the cart item
+        $cartItem->delete();
+
+        // Redirect back to the cart page
         return redirect()->route('cart.index');
     }
 }
