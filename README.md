@@ -7,7 +7,7 @@
     <body>
         <h1>Laravel Point of Sale (POS)</h1>
         <p>This is a Point of Sale (POS) system built using Laravel. The system includes features for managing employees, salaries, expenses, products, and customers.</p>
-           <h2>Technologies Used</h2>
+           <h2>Main Features</h2>
         <ul>
             <li>Inventory Management: Easily manage and track product inventory, including stock levels, product details, and categories.</li>
             <li>Order Processing: Streamline the order fulfillment process, from receiving orders to managing shipments and tracking delivery status.
