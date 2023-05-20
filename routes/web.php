@@ -46,4 +46,5 @@ Route::delete('/cart/{id}', 'CartController@destroy')->name('cart.destroy');
 Route::put('/cart/{id}','CartController@update')->name('cart.update');
 Route::post('/cart/order', 'CartController@order')->name('cart.order');
 Route::view('/cart/success', 'cart.success')->name('order.success');
+Route::resource('returns', ReturnController::class)->only(['index', 'create', 'store']);
 

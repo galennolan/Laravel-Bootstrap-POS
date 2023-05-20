@@ -7,7 +7,7 @@
     <div class="chart-container">
         <canvas id="ordersChart"></canvas>
     </div>
-
+    <div class="table-container">
     <table class="table">
         <thead>
             <tr>
@@ -25,9 +25,10 @@
                 <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->customer ? $order->customer->name : '' }}</td>
-                    <td>{{ $order->date }}</td>
-                    <td>{{ $order->total }}</td>
-                    <td>{{ $order->paid }}</td>
+                    <td>{{ date('d-m-y', strtotime($order->date)) }}</td>
+                    <td>{{ number_format($order->total, 0, ',', '.') }}</td>
+                    <td>{{ number_format($order->paid, 0, ',', '.') }}</td>
+
                     <td>{{ $order->due }}</td>
                     <td>
                         <a href="{{ route('orders.details', $order->id) }}" class="btn btn-sm btn-primary">Details</a>
@@ -36,7 +37,7 @@
             @endforeach
         </tbody>
     </table>
-
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -53,8 +54,7 @@
                 type: 'line',
                 data: {
                     labels: orderDates.map(function(label) {
-                        var parts = label.split('-');
-                        return parts[0] + '-' + parts[1] + '-' + parts[2].slice(-2);
+                        return label.split('-').reverse().join('-');
                     }),
                     datasets: [{
                         label: 'Order Total',
@@ -79,4 +79,17 @@
             });
         });
     </script>
+    <style>
+        .chart-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+    </style>
 @endsection
