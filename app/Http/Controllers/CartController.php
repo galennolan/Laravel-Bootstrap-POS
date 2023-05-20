@@ -99,7 +99,7 @@ class CartController extends Controller
     
         foreach ($cartItems as $cartItem) {
             $orderDetail = new OrderDetail();
-            $orderDetail->order_id = "11";
+            $orderDetail->order_id =  $order->id;
             $orderDetail->product_id = $cartItem->product_id;
             $orderDetail->quantity = $cartItem->quantity;
             $orderDetail->price = $cartItem->product->selling_price;
