@@ -36,17 +36,6 @@
     <li>Version Control: Git (GitHub)</li>
 </ul>
 
-<h2>Requirements</h2>
-<p>To run this application, you will need:</p>
-<ul>
-    <li>PHP version 7.2.5 or newer</li>
-    <li>Laravel version 7.0 or newer</li>
-    <li>The following dependencies:
-        <ul>
-            <li>barryvdh/laravel-dompdf: ^2.0</li>
-            <li>fideloper/proxy: ^4.2</li>
-            <li>fruit
-
         <h2>Requirements</h2>
         <p>To run this application, you will need:</p>
         <ul>
