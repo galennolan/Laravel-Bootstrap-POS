@@ -2,7 +2,8 @@
 
 @section('content')
     <h1>All Orders</h1>
-
+   
+    
     <div class="chart-container">
         <canvas id="ordersChart"></canvas>
     </div>
@@ -51,7 +52,10 @@
             var chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: orderDates,
+                    labels: orderDates.map(function(label) {
+                        var parts = label.split('-');
+                        return parts[0] + '-' + parts[1] + '-' + parts[2].slice(-2);
+                    }),
                     datasets: [{
                         label: 'Order Total',
                         data: orderTotals,
