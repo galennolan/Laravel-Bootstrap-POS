@@ -57,37 +57,37 @@
             <li class="nav-item">
                 <a class="nav-link" href="/customers">
                     <i class="fas fa-users fa-fw"></i>
-                    <span>Customers</span></a>
+                    <span>Pelanggan</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/suppliers">
                     <i class="fas fa-truck fa-fw"></i>
-                    <span>Suppliers</span></a>
+                    <span>Pemasok</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/employees">
                     <i class="fas fa-users-cog fa-fw"></i>
-                    <span>Employees</span></a>
+                    <span>Karyawan</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/expenses">
                     <i class="fas fa-money-bill fa-fw"></i>
-                    <span>Expenses</span></a>
+                    <span>Pengeluaran</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/products">
                     <i class="fas fa-boxes fa-fw"></i>
-                    <span>Products</span></a>
+                    <span>Produk</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/salaries">
                     <i class="fas fa-money-bill-alt fa-fw"></i>
-                    <span>Salary</span></a>
+                    <span>Gaji</span></a>
             </li>
             
             <li class="nav-item">
@@ -101,6 +101,13 @@
                 <a class="nav-link" href="/cart">
                     <i class="fas fa-shopping-bag fa-fw"></i>
                     <span>Carts</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/returns">
+                    <i class="fas fa-backward"></i>
+                    <span>Pengembalian</span>
                 </a>
             </li>
             <!-- Divider -->
@@ -208,7 +215,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Create By: Your Name<br>Copyright &copy; Your Website 2020</span>
+                        <span>Create By: Galih Setiawan<br>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>
