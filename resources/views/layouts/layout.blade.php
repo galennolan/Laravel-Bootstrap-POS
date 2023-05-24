@@ -47,25 +47,23 @@
             <i class="fas fa-fw fa-home"></i>
             <span> Beranda </span> </a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link" href="/categories">
-                    <i class="fas fa-tags fa-fw"></i>
-                    <span>Kategori</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/customers">
-                    <i class="fas fa-users fa-fw"></i>
-                    <span>Pelanggan</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/suppliers">
-                    <i class="fas fa-truck fa-fw"></i>
-                    <span>Pemasok</span></a>
-            </li>
-
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder-open"></i>
+                    <span>Manajemen</span>
+                </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item fas fa-boxes" href="{{route('products.index')}}">  Barang</a>
+                        <a class="collapse-item fas fa-list-alt" href="/categories"> Kategori Barang</a>
+                        <a class="collapse-item fas fa-list-alt" href=""> Manajemen Stok</a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="/customers"> Pelanggan</a>
+                        <a class="collapse-item fas fa-truck-moving" href="/suppliers"> Supplier</a>
+                    </div>
+                </div>
+                </li>
+        
             <li class="nav-item">
                 <a class="nav-link" href="/employees">
                     <i class="fas fa-users-cog fa-fw"></i>
@@ -76,12 +74,6 @@
                 <a class="nav-link" href="/expenses">
                     <i class="fas fa-money-bill fa-fw"></i>
                     <span>Pengeluaran</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/products">
-                    <i class="fas fa-boxes fa-fw"></i>
-                    <span>Produk</span></a>
             </li>
 
             <li class="nav-item">

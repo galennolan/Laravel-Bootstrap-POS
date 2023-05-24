@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-
+@include('sweetalert::alert')
 @section('content')
     <div class="container">
         <div class="row">
@@ -46,7 +46,9 @@
                                                 <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete?')">Delete</button>
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger me-2 delete-btn" onclick="return confirmDelete(event)">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
                                                 </form>
                                             </div>
                                         </td>

@@ -19,7 +19,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Email</th>
                                     <th>Phone</th>
                                     <th>Address</th>
                                     <th>Joining Date</th>
@@ -30,11 +29,13 @@
                                 @foreach ($employees as $employee)
                                     <tr>
                                         <td>{{ $employee->id }}</td>
-                                        <td>{{ $employee->name }}</td>
-                                        <td>{{ $employee->email }}</td>
+                                        <td>{{ $employee->name }}
+                                            <br> <small> {{ $employee->email }}</small>
+                                        </td>
                                         <td>{{ $employee->phone }}</td>
                                         <td>{{ $employee->address }}</td>
-                                        <td>{{ $employee->joining_date }}</td>
+                                        <td>{{ date('d-M-Y', strtotime($employee->joining_date)) }}</td>
+
                                         <td>
                                             <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-primary btn-sm">View</a>
                                             <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-secondary btn-sm">Edit</a>

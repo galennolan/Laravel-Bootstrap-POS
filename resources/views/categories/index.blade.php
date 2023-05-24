@@ -16,7 +16,9 @@
                     <tr>
                         <td>{{ $category->name }}</td>
                         <td> 
-                            
+                            <button type="button" class="btn btn-sm btn-outline-primary me-2" onclick="window.location='{{ route('categories.show', $category->id) }}'">
+                                <i class="fas fa-eye"></i>
+                            </button>
                             <button type="button" class="btn btn-sm btn-outline-primary me-2" onclick="window.location='{{ route('categories.edit', $category->id) }}'">
                                 <i class="fas fa-edit"></i>
                             </button>

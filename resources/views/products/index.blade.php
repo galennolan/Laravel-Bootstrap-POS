@@ -13,29 +13,33 @@
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
                       
-                            <table class="table table-bordered tables-striped" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
+                                     <th>Photo</th>   
                                     <th>Name</th>
-                                    <th>Code</th>
-                                    <th>Quantity</th>
-                                    <th>Category</th>
-                                    <th>Supplier</th>
-                                    <th>Buying Price</th>
-                                    <th>Selling Price</th>
+                                    <th>Quantity</th>                      
+                                    <th>Harga</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($products as $product)
                                     <tr>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->code }}</td>
-                                        <td>{{ $product->quantity }}</td>
-                                        <td>{{ $product->category->name }}</td>
-                                        <td>{{ $product->supplier->name }}</td>
-                                        <td>{{ $product->buying_price }}</td>
-                                        <td>{{ $product->selling_price }}</td>
+                                        <td>
+                                            @if($product->photo)
+                                                <img src="{{ asset('asset/img/product/' . $product->photo) }}" width="100" alt="{{ $product->name }}">
+                                            @else
+                                                No Photo
+                                            @endif
+                                        </td>
+                                        <td><span class="font-weight-bold">{{ $product->name }}</Span>
+                                            <br><small>{{ number_format($product->buying_price, 0, ',', '.') }}</small>
+                             
+                                           <br> <small>{{ $product->category->name }}</small>
+                                        </td>
+                                        <td>{{ $product->quantity }}</td>                       
+                                        <td>{{ number_format($product->selling_price, 0, ',', '.') }}</td>
                                         <td>
                                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm float-left mr-2">Edit</a>
                                             <form action="{{ route('products.destroy', $product->id) }}" method="POST">
