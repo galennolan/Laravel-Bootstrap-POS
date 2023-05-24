@@ -7,6 +7,35 @@
     <body>
         <h1>Laravel Point of Sale (POS)</h1>
         <p>This is a Point of Sale (POS) system built using Laravel. The system includes features for managing employees, salaries, expenses, products, and customers.</p>
+           <h2>Main Features</h2>
+        <ul>
+            <li>Inventory Management: Easily manage and track product inventory, including stock levels, product details, and categories.</li>
+            <li>Order Processing: Streamline the order fulfillment process, from receiving orders to managing shipments and tracking delivery status.
+</li>
+            <li>Expense Tracking: Keep track of business expenses, such as utilities, rent, and supplies. Generate reports to analyze expenses and identify cost-saving opportunities.
+</li>
+            <li>Employee Management: Manage employee records, track attendance, and handle payroll processing. Ensure smooth collaboration and effective workforce management.
+</li>
+            <li>Reporting and Analytics: Generate comprehensive reports and analytics to gain insights into sales, expenses, and overall business performance. Visualize data using charts and graphs for better decision-making.
+</li>
+            <li>Customer Relationship Management (CRM): Maintain a centralized customer database, manage customer profiles, track interactions, and provide personalized customer support.
+</li>
+                  <li>Supplier Management: Manage supplier information, track orders, and maintain good relationships with suppliers for efficient procurement.
+</li>
+                  <li>User Authentication and Access Control: Implement secure user authentication and role-based access control to protect sensitive data and ensure authorized access to different application features.
+</li>
+        </ul>
+        
+       <h2>Technologies Used</h2>
+<ul>
+    <li>Backend: PHP (Laravel Framework)</li>
+    <li>Frontend: HTML, CSS, JavaScript (Bootstrap)</li>
+    <li>Database: MySQL</li>
+    <li>Charting: Chart.js</li>
+    <li>Data Tables: DataTables.js</li>
+    <li>Version Control: Git (GitHub)</li>
+</ul>
+
         <h2>Requirements</h2>
         <p>To run this application, you will need:</p>
         <ul>
