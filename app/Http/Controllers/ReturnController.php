@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Pengembalian;
 use App\OrderDetail;
+use DB;
 use Illuminate\Http\Request;
 
 class ReturnController extends Controller
@@ -17,11 +18,14 @@ class ReturnController extends Controller
 
     public function create()
     {
-        // Retrieve the list of order details for the return form
-        $orderDetails = OrderDetail::all();
-
+        $orderDetails = OrderDetail::select('order_details.id', 'customers.name as customer_name','products.name as product_name','order_details.quantity as product_qty')
+        ->join('orders', 'order_details.order_id', '=', 'orders.id')
+        ->join('customers', 'orders.customer_id', '=', 'customers.id')
+        ->join('products','order_details.product_id', '=', 'products.id')
+        ->get();
         return view('returns.create', compact('orderDetails'));
     }
+
 
     public function store(Request $request)
     {

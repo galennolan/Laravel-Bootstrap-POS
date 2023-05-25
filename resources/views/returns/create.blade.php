@@ -2,15 +2,25 @@
 
 @section('content')
     <h1>Create Return</h1>
-
+    
     <form action="{{ route('returns.store') }}" method="POST">
         @csrf
+        <div class="form-group">
+            <label for="order_detail_id">Pilih Customer Detail:</label>
+            <select name="order_detail_id" id="order_detail_id" class="form-control">
+                <option value="">Select customer</option>
+                @foreach ($orderDetails as $orderDetail)
+                    <option value="{{$orderDetail->id }}">{{ $orderDetail->customer_name }}</option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="form-group">
             <label for="order_detail_id">Order Detail:</label>
             <select name="order_detail_id" id="order_detail_id" class="form-control">
                 <option value="">Select an order detail</option>
                 @foreach ($orderDetails as $orderDetail)
-                    <option value="{{$orderDetail->id }}">{{ optional($orderDetail->product)->name }}</option>
+                    <option value="{{$orderDetail->id }}">{{ $orderDetail->product_name }}</option>
                 @endforeach
             </select>
         </div>

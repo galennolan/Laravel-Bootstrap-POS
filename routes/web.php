@@ -47,4 +47,14 @@ Route::put('/cart/{id}','CartController@update')->name('cart.update');
 Route::post('/cart/order', 'CartController@order')->name('cart.order');
 Route::view('/cart/success', 'cart.success')->name('order.success');
 Route::resource('returns', ReturnController::class)->only(['index', 'create', 'store']);
+// routes/web.php
+
+// Route for category_product
+Route::get('/category-product/{id}', [PosController::class, 'category_product'])->name('category.product');
+
+// Route for today_history
+Route::get('/today-history', 'PosController@todayHistory')->name('pos.todayHistory');
+
+// Route for yesterday_history
+Route::get('/yesterday-history', [PosController::class, 'yesterday_history'])->name('yesterday.history');
 

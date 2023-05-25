@@ -95,7 +95,12 @@
                     <span>Carts</span>
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="/today-history">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Laporan</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/returns">
                     <i class="fas fa-backward"></i>

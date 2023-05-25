@@ -8,8 +8,8 @@
         <canvas id="ordersChart"></canvas>
     </div>
     <div class="table-container">
-    <table class="table">
-        <thead>
+    <table class="table table-striped">
+        <thead style="background-color: #333; color: #fff;">
             <tr>
                 <th>#</th>
                 <th>Customer</th>
