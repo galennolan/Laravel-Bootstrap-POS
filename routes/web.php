@@ -50,11 +50,11 @@ Route::resource('returns', ReturnController::class)->only(['index', 'create', 's
 // routes/web.php
 
 // Route for category_product
-Route::get('/category-product/{id}', [PosController::class, 'category_product'])->name('category.product');
+Route::get('/category-product/{id}','PosController@categoryProduct')->name('pos.categoryProduct');
 
 // Route for today_history
 Route::get('/today-history', 'PosController@todayHistory')->name('pos.todayHistory');
 
 // Route for yesterday_history
-Route::get('/yesterday-history', [PosController::class, 'yesterday_history'])->name('yesterday.history');
+Route::get('/yesterday-history', 'PosController@yesterdayHistory')->name('pos.yesterdayHistory');
 

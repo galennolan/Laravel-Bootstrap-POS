@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Input;
 use App\Cart;
 use App\Product;
 use App\Customer;
@@ -14,9 +14,23 @@ class CartController extends Controller
     private function formatPrice($price) {
         return number_format($price, 0, ',', '.');
     }
+    
 
-    public function index()
+    
+    public function index(Request $request)
     {
+        if ($request->has('query')) {
+            $query = $request->input('query');
+    
+            // Perform the search query
+            $products = Product::where('name', 'LIKE', '%' . $query . '%')->get();
+    
+            // Render the product cards for search results
+            $html = view('cart.product_cards', compact('products'))->render();
+    
+            // Return the rendered HTML
+            return response()->json($html);
+        }
         $products = Product::available()->get();
         $customers = Customer::all();
         $cartItems = Cart::with('product')->get();
@@ -40,15 +54,22 @@ class CartController extends Controller
 
         return view('cart.index', compact('products', 'cartItems', 'formattedTotal','customers','subtotalpr'));
     }
-
-
-
     public function store(Request $request)
     {
+        if ($request->has('query')) {
+            $query = $request->input('query');
+    
+            // Perform the search query
+            $products = Product::where('name', 'LIKE', '%' . $query . '%')->get();
+    
+            // Return the search results as JSON
+            return response()->json($products);
+        }
+    
         $product = Product::findOrFail($request->id);
-
+    
         $cart = Cart::where('product_id', $request->id)->first();
-
+    
         if ($cart) {
             $cart->quantity = $cart->quantity + 1;
             $cart->save();
@@ -58,9 +79,10 @@ class CartController extends Controller
             $cart->quantity = 1;
             $cart->save();
         }
-
+    
         return redirect()->route('cart.index');
     }
+    
     public function order(Request $request)
     {
         $cartItems = Cart::with('product')->get();
@@ -111,6 +133,7 @@ class CartController extends Controller
     
         return redirect()->route('order.success');
     }
+    
     
     public function increase($id)
     {

@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header">Add Salary</div>
+                    <div class="card-header bg-info" style="opacity: 0.2"> Add Salary</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('salaries.store') }}">
@@ -106,13 +106,15 @@
                                     <td>{{ $salary->employee->name }}</td>
                                     <td>{{ $salary->month_year }}</td>
                                     <td>{{ $salary->amount }}</td>
-                                    <td><a href="{{ route('salaries.edit', $salary->id) }}" class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('salaries.destroy', $salary->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">Delete</button>
-                                    </form>
+                                    <td>
+                                        <a href="{{ route('salaries.edit', $salary->id) }}" class="btn btn-primary">Edit</a>
+                                        <form action="{{ route('salaries.destroy', $salary->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
                                     </td>
+
                                 </tr>
                                 @endforeach
                             </tbody>
