@@ -8,25 +8,24 @@
             <!-- Add the search input field -->
             <div class="input-group mb-3">
                 <input type="text" id="search-input" class="form-control" placeholder="Search product">
-                <div class="input-group-append">
-                    <button id="search-button" class="btn btn-primary">Search</button>
-                </div>
             </div>
-            <div class="card-deck">
+            <div class="card-deck" id="product-ygdipilih">
                 @foreach ($products as $product)
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $product->name }}</h5>
-                        <p class="card-text">
-                            Price: {{ $product->formatted_selling_price }}<br>
-                            Qty: {{ $product->quantity }}
-                        </p>
-                        <form action="{{ route('cart.store') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $product->id }}">
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i></button>
-                        </form>
-                    </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ $product->name }}</h5>
+                    <img src="{{  asset('asset/img/product/' . $product->photo )}}" alt="Product Image" class="card-img-top">
+                    <p class="card-text">
+                        Price: {{ $product->formatted_selling_price }}<br>
+                        Qty: {{ $product->quantity }}
+                    </p>
+                    <form action="{{ route('cart.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+                    </form>
+                </div>
+
                 </div>
                 @endforeach
             </div>
@@ -107,11 +106,12 @@
     <button type="submit" class="btn btn-primary">Order All</button>
 </form>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
     // Handle search button click event
-    $('#search-button').click(function() {
-        var query = $('#search-input').val();
+    $('#search-input').on('input',function() {
+        var query = $(this).val();
 
         // Perform the AJAX request to retrieve search results
         $.ajax({
@@ -120,7 +120,7 @@ $(document).ready(function() {
             data: { query: query },
             success: function(response) {
                 // Update the product cards with the search results
-                $('#product-cards').html(response);
+                $('#product-ygdipilih').html(response);
             },
             error: function(error) {
                 console.log(error);
@@ -129,3 +129,5 @@ $(document).ready(function() {
     });
 });
 </script>
+
+
